@@ -1,0 +1,15 @@
+# ============================================================
+# 奖励模型 (Reward Model) 训练配置 — RLHF 第 2 步 (可选实操)
+# 被 src/train/train_reward.py 读取。
+# ============================================================
+
+pref_file: datasets/preference.jsonl    # 复用阶段 11 的偏好数据
+output_dir: outputs/reward_model
+
+num_train_epochs: 3
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 4
+learning_rate: 0.00005
+max_length: 1024
+logging_steps: 1
+seed: 42
