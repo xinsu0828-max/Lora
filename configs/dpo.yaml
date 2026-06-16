@@ -1,0 +1,32 @@
+# ============================================================
+# DPO 训练超参配置
+# 作用: 集中管理 DPO 偏好优化的超参, 被 src/train/train_dpo.py 读取。
+# ============================================================
+
+# --- 起点模型 ---
+# 默认从基座开始(可靠、简单); 如要"在 SFT 之上继续 DPO", 把它改成 outputs/lora_adapter
+start_from: unsloth/qwen3-1.7b-unsloth-bnb-4bit
+
+# --- 数据 ---
+pref_file: datasets/preference.jsonl
+
+# --- 输出 ---
+output_dir: outputs/dpo_adapter
+
+# --- DPO 核心 ---
+beta: 0.1                  # 偏离参考模型的力度; 越小越敢调整, 越大越保守
+
+# --- 训练规模 ---
+num_train_epochs: 3
+per_device_train_batch_size: 1     # DPO 一条样本含 chosen+rejected, 更占显存, batch 调小
+gradient_accumulation_steps: 4
+learning_rate: 0.00005             # 5e-5, DPO 学习率通常比 SFT 小
+warmup_ratio: 0.1
+lr_scheduler_type: cosine
+optim: adamw_8bit
+logging_steps: 1
+seed: 42
+
+# --- 长度限制 ---
+max_length: 1024           # prompt + 回答 总长度上限
+max_prompt_length: 512     # prompt 部分长度上限
