@@ -1,0 +1,21 @@
+# ============================================================
+# LoRA 超参配置
+# 作用: 集中管理 LoRA 的所有超参, 被 src/train/lora_config.py 读取,
+#       并在训练阶段(05)用于构建 PEFT 模型。
+# ============================================================
+
+r: 16                  # 秩: LoRA 旁路的容量。学习任务 8~16 足够。
+lora_alpha: 32         # 缩放因子, 实际缩放 = alpha/r = 2.0。常设为 r 的 1~2 倍。
+lora_dropout: 0.05     # 旁路 dropout, 防过拟合。数据少可适当调高。
+bias: none             # 是否训练 bias: none / all / lora_only。一般 none。
+task_type: CAUSAL_LM   # 任务类型: 因果语言模型(生成式)。
+
+# 给哪些线性层加 LoRA 旁路 (Qwen3 的注意力 + MLP 线性层)
+target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj

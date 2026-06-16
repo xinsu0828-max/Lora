@@ -1,0 +1,32 @@
+# ============================================================
+# 训练超参配置
+# 作用: 集中管理 SFT 训练的所有超参, 被 src/train/train_lora.py 读取。
+# 在 Colab T4 GPU 上运行。
+# ============================================================
+
+# --- 数据 (来自阶段 02 的产物) ---
+train_file: datasets/processed/train.jsonl
+val_file: datasets/processed/val.jsonl
+
+# --- 输出 ---
+output_dir: outputs/lora_adapter      # adapter 保存位置
+
+# --- 训练规模 ---
+num_train_epochs: 10                  # 数据少(27条), 多过几遍才学得会身份
+per_device_train_batch_size: 2        # 每设备 batch, T4 显存有限
+gradient_accumulation_steps: 4        # 梯度累积, 等效 batch = 2*4 = 8
+
+# --- 优化 ---
+learning_rate: 0.0002                 # 2e-4, LoRA 常用学习率
+warmup_ratio: 0.05                    # 学习率预热占比
+lr_scheduler_type: cosine             # 余弦衰减
+weight_decay: 0.01                    # 权重衰减, 轻微正则
+optim: adamw_8bit                     # 8-bit AdamW, 省显存
+
+# --- 日志与保存 ---
+logging_steps: 1                      # 每步打日志(数据少)
+save_strategy: epoch                  # 每个 epoch 存一次
+seed: 42                              # 随机种子, 可复现
+
+# --- 量化 (QLoRA) ---
+load_in_4bit: true                    # 4-bit 加载基座, 省显存

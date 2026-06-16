@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# 训练产物 / 大文件 (不进版本库, 通过脚本生成)
+outputs/*
+!outputs/.gitkeep
+models/*
+!models/.gitkeep
+
+# 数据集大文件 (小样本可保留, 大文件忽略)
+datasets/*.arrow
+datasets/*.bin
+
+# 实验日志
+experiments/*.log
+wandb/
+
+# IDE / 系统
+.idea/
+.DS_Store
+.ipynb_checkpoints/

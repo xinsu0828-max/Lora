@@ -1,0 +1,22 @@
+# ============================================================
+# Colab GPU 训练依赖 (Google Colab, Linux + Tesla T4)
+# 用途: 真正执行 LoRA / QLoRA / DPO 训练。
+# 在 Colab notebook 第一个 cell 里执行:
+#   !pip install -r requirements-colab.txt
+# 注意: Colab 已自带匹配 CUDA 的 torch, 通常无需重装 torch。
+# ============================================================
+
+# --- 核心 HuggingFace 生态 ---
+transformers>=4.46.0
+datasets>=3.0.0
+peft>=0.13.0
+trl>=0.12.0
+accelerate>=1.0.0
+
+# --- GPU 训练加速与量化 (仅 Linux GPU 可用) ---
+unsloth                # LoRA 训练加速, 省显存
+bitsandbytes>=0.44.0   # 4-bit / 8-bit 量化 (QLoRA 底层)
+
+# --- 工具 ---
+pyyaml>=6.0
+sentencepiece>=0.2.0

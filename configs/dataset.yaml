@@ -1,0 +1,13 @@
+# ============================================================
+# 数据集配置
+# 作用: 把"用哪份数据、怎么划分"与代码解耦, 换数据只改这里。
+# 被 src/build_dataset.py 读取。
+# ============================================================
+
+name: identity                       # 数据集名称(任务标识)
+raw_path: datasets/identity.jsonl    # 原始 JSONL 路径
+output_dir: datasets/processed       # 划分后输出目录
+format: messages                     # 数据格式: messages(对话) 
+
+val_ratio: 0.1                        # 验证集占比 (10%)
+seed: 42                              # 随机种子, 保证划分可复现
