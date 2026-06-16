@@ -20,3 +20,8 @@ bitsandbytes>=0.44.0   # 4-bit / 8-bit 量化 (QLoRA 底层)
 # --- 工具 ---
 pyyaml>=6.0
 sentencepiece>=0.2.0
+
+# --- 服务化 (阶段 10) ---
+fastapi>=0.115.0       # OpenAI 兼容 API 服务框架
+uvicorn>=0.30.0        # ASGI 服务器
+openai>=1.50.0         # 用作客户端测试自己的服务
