@@ -123,7 +123,7 @@ def load_model(model_path: str, model_config: str) -> None:
         tokenizer=tokenizer,
         enable_thinking=cfg.get("enable_thinking", False),
     )
-    print("[服务] 模型加载完成, 接口就绪。")
+    print("[服务] 模型加载完成, 接口就绪。", flush=True)
 
 
 def main() -> None:
