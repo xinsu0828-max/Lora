@@ -19,6 +19,7 @@
 | 12 | RLHF 学习 | docs/12_rlhf.md, train_reward.py(可选) |
 
 ## 工作流
+- **每个新 Colab 会话先跑 `notebooks/00_setup.ipynb`**：挂载 Drive、把模型缓存指到 Drive(只下一次)、克隆/更新代码、装依赖。
 - **代码**：本地 Cursor 编写 → `git push` → GitHub → Colab `git pull`。
 - **权重**：训练产物(adapter/合并模型)不进 Git，持久化到 Google Drive 或 HuggingFace Hub。
 - **配置/数据/代码三分离**：`configs/` `datasets/` `src/`。
